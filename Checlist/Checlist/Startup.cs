@@ -2,6 +2,10 @@ namespace Checlist
 {
     using Checlist.Configurations;
     using Checlist.Data;
+    using Checlist.Data.Contracts;
+    using Checlist.Data.Repositories;
+    using Checlist.Services;
+    using Checlist.Services.Contracts;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.EntityFrameworkCore;
@@ -27,6 +31,9 @@ namespace Checlist
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             ServiceConfiguration.AddIdentityConfigurations(services);
+
+            services.AddScoped<IActionService, ActionService>();
+            services.AddScoped<IActionRepository, ActionRepository>();
 
             services.AddControllersWithViews();
         }

@@ -1,6 +1,9 @@
 ﻿namespace Checlist.Data.Contracts
 {
-    public interface IActionRepository
+    using Checlist.Models;
+
+    public interface IActionRepository : IRepository<Action>
     {
+
     }
 }

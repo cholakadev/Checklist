@@ -3,9 +3,9 @@
     using Checlist.Data.Contracts;
     using Microsoft.EntityFrameworkCore;
 
-    public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
+    public abstract class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
-        public ApplicationDbContext DbContext { get; }
+        protected ApplicationDbContext DbContext { get; }
 
         protected DbSet<TEntity> Entities { get; }
 
