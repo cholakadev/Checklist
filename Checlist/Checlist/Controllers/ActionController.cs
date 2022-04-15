@@ -22,5 +22,10 @@
         {
             return View();
         }
+
+        public IActionResult Create()
+        {
+            return RedirectToAction("Index");
+        }
     }
 }
