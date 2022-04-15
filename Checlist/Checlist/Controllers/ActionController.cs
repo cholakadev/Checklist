@@ -1,9 +1,11 @@
 ﻿namespace Checlist.Controllers
 {
     using Checlist.Models;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Logging;
+    using System;
 
     public class ActionController : Controller
     {
@@ -18,14 +20,17 @@
             _userManager = userManager;
             _signInManager = signInManager;
         }
+
+        [Authorize]
         public IActionResult Index()
         {
             return View();
         }
-
-        public IActionResult Create()
+        [HttpPost]
+        public IActionResult Create([FromForm] string name, DateTime date)
         {
-            return RedirectToAction("Index");
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }
