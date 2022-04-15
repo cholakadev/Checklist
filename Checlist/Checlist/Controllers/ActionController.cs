@@ -4,7 +4,6 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.Extensions.Logging;
     using System;
 
     public class ActionController : Controller
@@ -30,7 +29,7 @@
         public IActionResult Create([FromForm] string name, DateTime date)
         {
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index");
         }
     }
 }
