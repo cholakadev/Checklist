@@ -1,3 +1,4 @@
+using Checlist.Configurations;
 using Checlist.Data;
 using Checlist.Models;
 using Microsoft.AspNetCore.Builder;
@@ -33,29 +34,9 @@ namespace Checlist
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDatabaseDeveloperPageExceptionFilter();
 
-            services.AddIdentity<User, Role>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders()
-                .AddDefaultUI();
+            ServiceConfiguration.AddIdentityConfigurations(services);
+
             services.AddControllersWithViews();
-
-            services.Configure<IdentityOptions>(options =>
-            {
-                // Default Password settings.
-                options.Password.RequireDigit = false;
-                options.Password.RequireLowercase = true;
-                options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequireUppercase = false;
-                options.Password.RequiredLength = 6;
-                options.Password.RequiredUniqueChars = 1;
-            });
-
-            services.ConfigureApplicationCookie(options =>
-            {
-                options.Cookie.Name = ".AspNetCore.Identity.Application";
-                options.ExpireTimeSpan = TimeSpan.FromMinutes(2);
-                options.SlidingExpiration = true;
-            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
