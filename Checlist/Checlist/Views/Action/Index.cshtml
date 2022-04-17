@@ -5,6 +5,19 @@
     ViewBag.Title = "Action data";
 }
 
+@section Styles
+{
+    <style type="text/css">
+        .table {
+            margin-top: 50px;
+        }
+
+        .btn-create-open {
+            margin-bottom: 10px;
+        }
+    </style>
+}
+
 @await Html.PartialAsync("_CreatePartial")
 
 <table class="table">
@@ -19,8 +32,9 @@
     <tbody>
         @foreach (var action in ViewBag.Actions)
         {
+            var index = ViewBag.Actions.IndexOf(action) + 1;
             <tr>
-                <th scope="row">1</th>
+                <th scope="row">@index</th>
                 <td>@action.Name</td>
                 <td>@action.Date</td>
                 <td>@action.Done</td>
