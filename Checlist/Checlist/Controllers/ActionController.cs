@@ -30,16 +30,23 @@
             => await _userManager.GetUserAsync(HttpContext.User);
 
         [Authorize]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var user = await this.GetCurrentUser();
+
+            var actions = this._actionService.GetAllActions(user.Id);
+
+            ViewBag.Actions = actions;
+
+            return View(actions);
         }
+
         [HttpPost]
         public async Task<IActionResult> Create([FromForm] string name, DateTime date)
         {
             var user = await this.GetCurrentUser();
 
-            this._actionService.AddAsync(name, date, user);
+            await this._actionService.AddAsync(name, date, user);
 
             return RedirectToAction("Index");
         }

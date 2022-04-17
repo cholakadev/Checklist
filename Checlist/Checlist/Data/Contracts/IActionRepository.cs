@@ -1,9 +1,12 @@
 ﻿namespace Checlist.Data.Contracts
 {
-    using Checlist.Models;
+    using Action = Models.Action;
+    using System;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
 
     public interface IActionRepository : IRepository<Action>
     {
-
+        List<Action> GetAllUserActionsAsync(Guid userId);
     }
 }

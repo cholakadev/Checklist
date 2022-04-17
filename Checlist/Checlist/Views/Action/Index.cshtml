@@ -1,4 +1,30 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @inject SignInManager<User> SignInManager
+@model IEnumerable<Checlist.Models.Action>
+@{
+    ViewBag.Title = "Action data";
+}
 
 @await Html.PartialAsync("_CreatePartial")
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Date</th>
+            <th scope="col">Done</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var action in ViewBag.Actions)
+        {
+            <tr>
+                <th scope="row">1</th>
+                <td>@action.Name</td>
+                <td>@action.Date</td>
+                <td>@action.Done</td>
+            </tr>
+        }
+    </tbody>
+</table>

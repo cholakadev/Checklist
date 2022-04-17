@@ -2,9 +2,14 @@
 {
     using Checlist.Models;
     using System;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using Action = Models.Action;
 
     public interface IActionService
     {
-        void AddAsync(string name, DateTime date, User user);
+        Task AddAsync(string name, DateTime date, User user);
+
+        List<Action> GetAllActions(Guid userId);
     }
 }

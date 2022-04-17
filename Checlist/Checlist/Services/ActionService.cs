@@ -1,6 +1,8 @@
 ﻿namespace Checlist.Services
 {
     using System;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
     using Checlist.Data.Contracts;
     using Checlist.Models;
     using Checlist.Services.Contracts;
@@ -14,7 +16,7 @@
             this._repository = repository;
         }
 
-        public void AddAsync(string name, DateTime date, User user)
+        public async Task AddAsync(string name, DateTime date, User user)
         {
             var action = new Models.Action()
             {
@@ -22,10 +24,14 @@
                 Name = name,
                 Date = date,
                 Done = false,
-                User = user
+                User = user,
+                UserId = user.Id
             };
 
-            this._repository.AddAsync(action);
+            await this._repository.AddAsync(action);
         }
+
+        public List<Models.Action> GetAllActions(Guid userId)
+            => this._repository.GetAllUserActionsAsync(userId);
     }
 }
