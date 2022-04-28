@@ -1,11 +1,13 @@
 ﻿namespace Checlist.Controllers
 {
+    using Checlist.DTOs;
     using Checlist.Models;
     using Checlist.Services.Contracts;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using System;
+    using System.Collections.Generic;
     using System.Security.Claims;
     using System.Threading.Tasks;
 
@@ -36,9 +38,17 @@
 
             var actions = this._actionService.GetAllActions(user.Id);
 
-            ViewBag.Actions = actions;
+            var actionDTOs = new List<DTOs.Action>();
 
-            return View(actions);
+            foreach (var action in actions)
+            {
+                var dto = action.ToDTO();
+                actionDTOs.Add(dto);
+            }
+
+            ViewBag.Actions = actionDTOs;
+
+            return View(actionDTOs);
         }
 
         [HttpPost]

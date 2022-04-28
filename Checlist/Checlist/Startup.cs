@@ -35,6 +35,7 @@ namespace Checlist
             services.AddScoped<IActionService, ActionService>();
             services.AddScoped<IActionRepository, ActionRepository>();
 
+            ServiceConfiguration.AddMapperConfiguration(services);
             services.AddControllersWithViews();
         }
 
