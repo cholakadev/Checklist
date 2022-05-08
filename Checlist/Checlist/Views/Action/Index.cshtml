@@ -12,8 +12,21 @@
             margin-top: 50px;
         }
 
+        td {
+            vertical-align: middle !important;
+        }
+
         .btn-create-open {
             margin-bottom: 10px;
+        }
+
+        .checkbox, .checkbox-input {
+            width: 20px;
+            height: 20px;
+        }
+
+        .checkbox-label {
+            margin: 0;
         }
     </style>
 }
@@ -37,7 +50,16 @@
                 <th scope="row">@index</th>
                 <td>@action.Name</td>
                 <td>@action.Date</td>
-                <td>@action.Done</td>
+                <td>
+                    <div class="checkbox">
+                        <label class="checkbox-label">
+                            <input type="checkbox"
+                                   class="checkbox-input"
+                                   value="@action.Done"
+                                   @if (action.Done) { <text> checked </text> } />
+                        </label>
+                    </div>
+                </td>
             </tr>
         }
     </tbody>
