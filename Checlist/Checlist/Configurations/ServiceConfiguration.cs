@@ -1,7 +1,6 @@
 ﻿namespace Checlist.Configurations
 {
     using System;
-    using AutoMapper;
     using Checlist.Data;
     using Checlist.Models;
     using Microsoft.AspNetCore.Identity;
@@ -33,19 +32,6 @@
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
                 options.SlidingExpiration = true;
             });
-
-            return services;
-        }
-
-        public static IServiceCollection AddMapperConfiguration(this IServiceCollection services)
-        {
-            var mapperConfig = new MapperConfiguration(mc =>
-            {
-                mc.AddProfile(new DTOs.Mapper());
-            });
-
-            IMapper mapper = mapperConfig.CreateMapper();
-            services.AddSingleton(mapper);
 
             return services;
         }
