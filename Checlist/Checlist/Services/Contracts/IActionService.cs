@@ -1,10 +1,10 @@
 ﻿namespace Checlist.Services.Contracts
 {
-    using Checlist.Models;
     using System;
+    using Checlist.Models;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using Action = Models.Action;
+    using Action = DTOs.Action;
 
     public interface IActionService
     {

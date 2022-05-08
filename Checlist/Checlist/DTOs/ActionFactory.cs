@@ -2,13 +2,13 @@
 {
     public static class ActionFactory
     {
-        public static Action ToDTO(this Models.Action action) =>
+        public static Action ToModel(this Models.Action action) =>
             new Action
             {
                 Id = action.Id,
                 Name = action.Name,
                 Done = action.Done,
-                Date = action.Date.ToString("dd MM yyyy")
+                Date = action.Date.ToString("dd MMM, yyyy")
             };
     }
 }

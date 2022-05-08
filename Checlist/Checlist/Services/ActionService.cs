@@ -2,10 +2,13 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
     using Checlist.Data.Contracts;
+    using Checlist.DTOs;
     using Checlist.Models;
     using Checlist.Services.Contracts;
+    using Action = DTOs.Action;
 
     public class ActionService : IActionService
     {
@@ -31,7 +34,25 @@
             await this._repository.AddAsync(action);
         }
 
-        public List<Models.Action> GetAllActions(Guid userId)
-            => this._repository.GetAllUserActionsAsync(userId);
+        public List<Action> GetAllActions(Guid userId)
+        {
+            var userActions = this._repository
+                .GetAllUserActionsAsync(userId);
+
+            var actions = new List<Action>();
+
+            foreach (var action in userActions)
+            {
+                var actionModel = action.ToModel();
+                actions.Add(actionModel);
+            }
+
+            actions = actions
+                .OrderBy(a => a.Date)
+                .ThenBy(a => a.Name)
+                .ToList();
+
+            return actions;
+        }
     }
 }

@@ -8,6 +8,7 @@
     using Microsoft.AspNetCore.Mvc;
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Security.Claims;
     using System.Threading.Tasks;
 
@@ -36,19 +37,12 @@
         {
             var user = await this.GetCurrentUser();
 
-            var actions = this._actionService.GetAllActions(user.Id);
+            var actions = this._actionService
+                .GetAllActions(user.Id);
 
-            var actionDTOs = new List<DTOs.Action>();
+            ViewBag.Actions = actions;
 
-            foreach (var action in actions)
-            {
-                var dto = action.ToDTO();
-                actionDTOs.Add(dto);
-            }
-
-            ViewBag.Actions = actionDTOs;
-
-            return View(actionDTOs);
+            return View(actions);
         }
 
         [HttpPost]
