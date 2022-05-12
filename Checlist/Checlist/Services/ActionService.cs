@@ -26,7 +26,7 @@
                 Id = Guid.NewGuid(),
                 Name = name,
                 Date = date,
-                Done = false,
+                State = ActionState.Todo,
                 User = user,
                 UserId = user.Id
             };

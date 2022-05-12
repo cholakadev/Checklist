@@ -6,10 +6,9 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.Rendering;
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Security.Claims;
+    using System.ComponentModel.DataAnnotations;
     using System.Threading.Tasks;
 
     public class ActionController : BaseController
@@ -52,6 +51,12 @@
 
             await this._actionService.AddAsync(name, date, user);
 
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Update([FromForm][Required] Guid actionId, ActionState state)
+        {
             return RedirectToAction("Index");
         }
     }

@@ -7,7 +7,7 @@
             {
                 Id = action.Id,
                 Name = action.Name,
-                Done = action.Done,
+                State = action.State,
                 Date = action.Date.ToString("dd MMM, yyyy")
             };
     }

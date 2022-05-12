@@ -1,4 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Identity
+@using Checlist.DTOs
 @inject SignInManager<User> SignInManager
 @model IEnumerable<Checlist.DTOs.Action>
 @{
@@ -51,14 +52,15 @@
                 <td>@action.Name</td>
                 <td>@action.Date</td>
                 <td>
-                    <div class="checkbox">
-                        <label class="checkbox-label">
-                            <input type="checkbox"
-                                   class="checkbox-input"
-                                   value="@action.Done"
-                                   @if (action.Done) { <text> checked </text> } />
-                        </label>
-                    </div>
+                    <form method="post" action="@Url.Action("Update", "Action")">
+                        <input name="actionId" type="hidden" value="@action.Id" />
+                        <select name="state" onchange="this.form.submit()">
+                            @foreach (var state in Enum.GetValues(typeof(ActionState)))
+                            {
+                                <option>@state</option>
+                            }
+                        </select>
+                    </form>
                 </td>
             </tr>
         }

@@ -6,7 +6,7 @@
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public bool Done { get; set; }
+        public ActionState State { get; set; }
         public string Date { get; set; }
     }
 }
