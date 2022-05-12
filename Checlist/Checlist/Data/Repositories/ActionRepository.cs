@@ -21,7 +21,10 @@
         public List<Action> GetAllUserActionsAsync(Guid userId)
         {
             var actions = base.GetAllAsync().Result;
-            actions.Where(x => x.UserId == userId);
+            actions = actions
+                .Where(x => x.UserId == userId)
+                .ToList();
+
             return actions;
         }
 
