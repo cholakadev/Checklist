@@ -34,6 +34,14 @@
             await this._repository.AddAsync(action);
         }
 
+        public async Task UpdateAsync(Guid actionId, ActionState state)
+        {
+            var action = this._repository.GetActionById(actionId);
+            action.State = state;
+
+            await this._repository.UpdateAsync(action);
+        }
+
         public List<Action> GetAllActions(Guid userId)
         {
             var userActions = this._repository

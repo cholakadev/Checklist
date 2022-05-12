@@ -32,6 +32,12 @@
     </style>
 }
 
+<script>
+    $("#Dropdown").on("change", function () {
+        $("form").submit();
+    });
+</script>
+
 @await Html.PartialAsync("_CreatePartial")
 
 <table class="table">
@@ -55,9 +61,13 @@
                     <form method="post" action="@Url.Action("Update", "Action")">
                         <input name="actionId" type="hidden" value="@action.Id" />
                         <select name="state" onchange="this.form.submit()">
+                            <option selected>@action.State</option>
                             @foreach (var state in Enum.GetValues(typeof(ActionState)))
                             {
-                                <option>@state</option>
+                                if (state.ToString() != action.State.ToString())
+                                {
+                                    <option>@state</option>
+                                }
                             }
                         </select>
                     </form>

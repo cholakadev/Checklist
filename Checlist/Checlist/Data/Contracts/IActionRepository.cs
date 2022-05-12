@@ -8,5 +8,7 @@
     public interface IActionRepository : IRepository<Action>
     {
         List<Action> GetAllUserActionsAsync(Guid userId);
+        Task UpdateAsync(Action action);
+        Action GetActionById(Guid actionId);
     }
 }

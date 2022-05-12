@@ -39,7 +39,11 @@
             var actions = this._actionService
                 .GetAllActions(user.Id);
 
+            var states = Enum.GetValues(typeof(ActionState));
+            var selectListStates = new SelectList(states);
+
             ViewBag.Actions = actions;
+            ViewBag.States = selectListStates;
 
             return View(actions);
         }
@@ -57,6 +61,8 @@
         [HttpPost]
         public async Task<IActionResult> Update([FromForm][Required] Guid actionId, ActionState state)
         {
+            await this._actionService.UpdateAsync(actionId, state);
+
             return RedirectToAction("Index");
         }
     }
