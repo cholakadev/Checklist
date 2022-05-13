@@ -1,6 +1,7 @@
 ﻿namespace Checlist.Data
 {
     using System;
+    using Checlist.Data.EntityConfigurations;
     using Checlist.Models;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
@@ -14,5 +15,11 @@
         }
 
         public DbSet<Action> Actions { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+            builder.ApplyConfigurationsFromAssembly(typeof(ActionEntityConfiguration).Assembly);
+        }
     }
 }
