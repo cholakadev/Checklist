@@ -29,6 +29,14 @@
         .checkbox-label {
             margin: 0;
         }
+
+        .delete-item-icon {
+            width: 30px;
+        }
+
+        .delete-action {
+            cursor: pointer;
+        }
     </style>
 }
 
@@ -41,6 +49,7 @@
             <th scope="col">Name</th>
             <th scope="col">Date</th>
             <th scope="col">Done</th>
+            <th scope="col"></th>
         </tr>
     </thead>
     <tbody>
@@ -66,6 +75,7 @@
                         </select>
                     </form>
                 </td>
+                <td><a class="delete-action"><img class="delete-item-icon" src="~/icons/delete-item.svg" /></a></td>
             </tr>
         }
     </tbody>
