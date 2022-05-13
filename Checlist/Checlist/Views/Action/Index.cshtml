@@ -40,6 +40,17 @@
     </style>
 }
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#delete").click(function (e) {
+            if (confirm("Are you sure you  want to delete this action?")) {
+                $("#delete-form").submit();
+            }
+        });
+    });
+</script>
+
 @await Html.PartialAsync("_CreatePartial")
 
 <table class="table">
@@ -75,7 +86,13 @@
                         </select>
                     </form>
                 </td>
-                <td><a class="delete-action"><img class="delete-item-icon" src="~/icons/delete-item.svg" /></a></td>
+                <td>
+                    @using (Html.BeginForm("Delete", "Action", FormMethod.Post, new { Id = "delete-form" }))
+                    {
+                        <input name="actionId" type="hidden" value="@action.Id" />
+                        <a class="delete-action"><img id="delete" class="delete-item-icon" src="~/icons/delete-item.svg" /></a>
+                    }
+                </td>
             </tr>
         }
     </tbody>
