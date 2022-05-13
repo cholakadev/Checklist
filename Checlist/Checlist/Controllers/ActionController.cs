@@ -1,8 +1,7 @@
 ﻿namespace Checlist.Controllers
 {
-    using Checlist.DTOs;
     using Checlist.Models;
-    using Checlist.Services.Contracts;
+    using Checlist.Business.Contracts;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -10,6 +9,7 @@
     using System;
     using System.ComponentModel.DataAnnotations;
     using System.Threading.Tasks;
+    using Checlist.Domain.Enums;
 
     public class ActionController : BaseController
     {

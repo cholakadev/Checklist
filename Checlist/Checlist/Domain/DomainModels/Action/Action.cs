@@ -1,5 +1,6 @@
-﻿namespace Checlist.DTOs
+﻿namespace Checlist.Domain.DomainModels.Action
 {
+    using Checlist.Domain.Enums;
     using System;
 
     public class Action

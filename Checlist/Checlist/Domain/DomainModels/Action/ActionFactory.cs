@@ -1,4 +1,4 @@
-﻿namespace Checlist.DTOs
+﻿namespace Checlist.Domain.DomainModels.Action
 {
     public static class ActionFactory
     {

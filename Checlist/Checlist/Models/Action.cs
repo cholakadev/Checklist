@@ -1,6 +1,6 @@
 ﻿namespace Checlist.Models
 {
-    using Checlist.DTOs;
+    using Checlist.Domain.Enums;
     using System;
     using System.ComponentModel.DataAnnotations;
 

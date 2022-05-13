@@ -1,14 +1,15 @@
-﻿namespace Checlist.Services
+﻿namespace Checlist.Business
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
     using Checlist.Data.Contracts;
-    using Checlist.DTOs;
     using Checlist.Models;
-    using Checlist.Services.Contracts;
-    using Action = DTOs.Action;
+    using Checlist.Business.Contracts;
+    using Action = Domain.DomainModels.Action.Action;
+    using Checlist.Domain.Enums;
+    using Checlist.Domain.DomainModels.Action;
 
     public class ActionService : IActionService
     {

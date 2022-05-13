@@ -1,7 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@using Checlist.DTOs
+@using Checlist.Domain.Enums
 @inject SignInManager<User> SignInManager
-@model IEnumerable<Checlist.DTOs.Action>
+@model IEnumerable<Checlist.Domain.DomainModels.Action.Action>
 @{
     ViewBag.Title = "Action data";
 }

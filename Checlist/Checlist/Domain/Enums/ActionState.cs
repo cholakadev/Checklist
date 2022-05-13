@@ -1,4 +1,4 @@
-﻿namespace Checlist.DTOs
+﻿namespace Checlist.Domain.Enums
 {
     public enum ActionState
     {

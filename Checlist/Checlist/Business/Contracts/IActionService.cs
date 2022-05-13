@@ -1,11 +1,11 @@
-﻿namespace Checlist.Services.Contracts
+﻿namespace Checlist.Business.Contracts
 {
     using System;
     using Checlist.Models;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using Action = DTOs.Action;
-    using Checlist.DTOs;
+    using Action = Domain.DomainModels.Action.Action;
+    using Checlist.Domain.Enums;
 
     public interface IActionService
     {
