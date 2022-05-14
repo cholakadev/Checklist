@@ -11,6 +11,7 @@
     {
         Task AddAsync(string name, DateTime date, User user);
         Task UpdateAsync(Guid actionId, ActionState state);
+        Task DeleteAsync(Guid actionId);
         List<Action> GetAllActions(Guid userId);
     }
 }

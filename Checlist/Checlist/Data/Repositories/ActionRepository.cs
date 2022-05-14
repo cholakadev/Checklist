@@ -12,7 +12,14 @@
 
         public ActionRepository(ApplicationDbContext dbContext) : base(dbContext)
         {
+        }
 
+        public Task DeleteAsync(Guid actionId)
+        {
+            var action = this.Entities.Find(actionId);
+            this.Entities.Remove(action);
+
+            return this.DbContext.SaveChangesAsync();
         }
 
         public Action GetActionById(Guid actionId)
@@ -31,6 +38,7 @@
         public Task UpdateAsync(Action action)
         {
             this.Entities.Update(action);
+
             return this.DbContext.SaveChangesAsync();
         }
     }

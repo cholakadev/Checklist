@@ -65,5 +65,13 @@
 
             return RedirectToAction("Index");
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete([FromForm][Required] Guid actionId)
+        {
+            await this._actionService.DeleteAsync(actionId);
+
+            return RedirectToAction("Index");
+        }
     }
 }

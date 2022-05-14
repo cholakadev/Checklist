@@ -63,5 +63,8 @@
 
             return actions;
         }
+
+        public Task DeleteAsync(Guid actionId)
+            => this._repository.DeleteAsync(actionId);
     }
 }
