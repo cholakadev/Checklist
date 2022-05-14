@@ -50,14 +50,11 @@
 
             var actions = new List<Action>();
 
-            foreach (var action in userActions)
-            {
-                var actionModel = action.ToModel();
-                actions.Add(actionModel);
-            }
+            userActions.ForEach(x => actions.Add(x.ToModel()));
 
             actions = actions
-                .OrderBy(a => a.Date)
+                .OrderBy(a => (int)a.State)
+                .ThenBy(a => a.Date)
                 .ThenBy(a => a.Name)
                 .ToList();
 

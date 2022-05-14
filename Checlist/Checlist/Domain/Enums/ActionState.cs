@@ -2,8 +2,8 @@
 {
     public enum ActionState
     {
-        Todo = 0,
-        InProgress = 1,
+        InProgress = 0,
+        Todo = 1,
         Done = 2
     }
 }
