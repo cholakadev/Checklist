@@ -8,7 +8,8 @@
                 Id = action.Id,
                 Name = action.Name,
                 State = action.State,
-                Date = action.Date.ToString("dd MMM, yyyy")
+                Date = action.Date,
+                DateString = action.Date.ToString("dd MMM, yyyy")
             };
     }
 }
