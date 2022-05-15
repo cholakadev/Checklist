@@ -90,10 +90,11 @@
                 var dataTargetCancel = "#DeleteModal" + action.Id;
 
                 <tr class=@(separate == true ? "separated" : "not-separated")>
-                    <td>@(((string)action.Name).Truncate(80))</td>
+                    <td data-toggle="tooltip" data-animation="true" data-placement="top" title="@action.Name">@(((string)action.Name).Truncate(80))</td>
                     <td>@action.DateString</td>
                     <td>
-                        <form method="post" action="@Url.Action("Update", "Action")">
+                        @using (Html.BeginForm("Update", "Action", FormMethod.Post))
+                        {
                             <input name="actionId" type="hidden" value="@action.Id" />
                             <select name="state" onchange="this.form.submit()">
                                 <option selected>@action.State</option>
@@ -105,7 +106,7 @@
                                     }
                                 }
                             </select>
-                        </form>
+                        }
                     </td>
                     <td>
                         <a class="deleteItem" data-toggle="modal" data-target="@dataTargetCancel"><img id="delete" class="delete-item-icon" src="~/icons/delete-item.svg" /></a>
