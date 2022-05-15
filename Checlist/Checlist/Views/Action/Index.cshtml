@@ -1,5 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using Checlist.Domain.Enums
+@using Checlist.Domain.DomainModels.Action;
 @inject SignInManager<User> SignInManager
 @model IEnumerable<Checlist.Domain.DomainModels.Action.Action>
 @{
@@ -89,7 +90,7 @@
                 var dataTargetCancel = "#DeleteModal" + action.Id;
 
                 <tr class=@(separate == true ? "separated" : "not-separated")>
-                    <td class="border-bottom-0">@action.Name</td>
+                    <td>@(((string)action.Name).Truncate(80))</td>
                     <td>@action.DateString</td>
                     <td>
                         <form method="post" action="@Url.Action("Update", "Action")">
