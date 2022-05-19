@@ -1,7 +1,5 @@
-﻿@using Microsoft.AspNetCore.Identity
-@using Checlist.Domain.Enums
+﻿@using Checlist.Domain.Enums
 @using Checlist.Domain.DomainModels.Action;
-@inject SignInManager<User> SignInManager
 @model IEnumerable<Checlist.Domain.DomainModels.Action.Action>
 @{
     ViewBag.Title = "Action data";
@@ -9,51 +7,7 @@
 
 @section Styles
 {
-    <style type="text/css">
-        .table {
-            margin-top: 50px;
-            border-collapse: collapse;
-        }
-
-        td {
-            vertical-align: middle !important;
-        }
-
-        .btn-create-open {
-            margin-bottom: 10px;
-        }
-
-        .checkbox, .checkbox-input {
-            width: 20px;
-            height: 20px;
-        }
-
-        .checkbox-label {
-            margin: 0;
-        }
-
-        .delete-item-icon {
-            width: 30px;
-        }
-
-        .deleteItem, .btn {
-            cursor: pointer;
-        }
-
-        .separated {
-            border-bottom: 1.1px solid black;
-        }
-
-        .action-name {
-            cursor: pointer;
-        }
-
-        a, a:visited, a:hover, a:active, a:focus {
-            color: black;
-            text-decoration: none;
-            outline: none;
-        }
-    </style>
+    <link rel="stylesheet" href="~/css/actions-index.css" />
 }
 
 <script>
@@ -69,9 +23,15 @@
     {
         <thead>
             <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Date</th>
-                <th scope="col">Done</th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Date)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.State)
+                </th>
                 <th scope="col"></th>
             </tr>
         </thead>
@@ -101,7 +61,7 @@
                 <tr class=@(separate == true ? "separated" : "not-separated")>
                     <td class="action-name"
                         data-toggle="tooltip"
-                        title="Title Here">
+                        title="@action.Name">
                         <a class="details-link" asp-action="Details" asp-route-id="@action.Id">
                             @(((string)action.Name).Truncate(80))
                         </a>

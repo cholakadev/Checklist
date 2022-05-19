@@ -1,0 +1,43 @@
+﻿.table {
+    margin-top: 50px;
+    border-collapse: collapse;
+}
+
+td {
+    vertical-align: middle !important;
+}
+
+.btn-create-open {
+    margin-bottom: 10px;
+}
+
+.checkbox, .checkbox-input {
+    width: 20px;
+    height: 20px;
+}
+
+.checkbox-label {
+    margin: 0;
+}
+
+.delete-item-icon {
+    width: 30px;
+}
+
+.deleteItem, .btn {
+    cursor: pointer;
+}
+
+.separated {
+    border-bottom: 1.1px solid black;
+}
+
+.action-name {
+    cursor: pointer;
+}
+
+a, a:visited, a:hover, a:active, a:focus {
+    color: black;
+    text-decoration: none;
+    outline: none;
+}
