@@ -10,9 +10,6 @@
 @section Styles
 {
     <style type="text/css">
-
-
-
         .table {
             margin-top: 50px;
             border-collapse: collapse;
@@ -46,11 +43,23 @@
         .separated {
             border-bottom: 1.1px solid black;
         }
+
+        .action-name {
+            cursor: pointer;
+        }
+
+        a, a:visited, a:hover, a:active, a:focus {
+            color: black;
+            text-decoration: none;
+            outline: none;
+        }
     </style>
 }
 
 <script>
-
+    $(document).ready(function () {
+        $("body").tooltip({ selector: '[data-toggle=tooltip]' });
+    });
 </script>
 
 @await Html.PartialAsync("_CreatePartial")
@@ -90,7 +99,13 @@
                 var dataTargetCancel = "#DeleteModal" + action.Id;
 
                 <tr class=@(separate == true ? "separated" : "not-separated")>
-                    <td data-toggle="tooltip" data-animation="true" data-placement="top" title="@action.Name">@(((string)action.Name).Truncate(80))</td>
+                    <td class="action-name"
+                        data-toggle="tooltip"
+                        title="Title Here">
+                        <a class="details-link" asp-action="Details" asp-route-id="@action.Id">
+                            @(((string)action.Name).Truncate(80))
+                        </a>
+                    </td>
                     <td>@action.DateString</td>
                     <td>
                         @using (Html.BeginForm("Update", "Action", FormMethod.Post))

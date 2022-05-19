@@ -20,6 +20,14 @@
             this._repository = repository;
         }
 
+        public async Task<Action> GetByIdAsync(Guid id)
+        {
+            var action = await this._repository.GetActionById(id);
+            var actionModel = action.ToModel();
+
+            return actionModel;
+        }
+
         public async Task AddAsync(string name, DateTime date, User user)
         {
             var action = new Models.Action()
@@ -37,7 +45,7 @@
 
         public async Task UpdateAsync(Guid actionId, ActionState state)
         {
-            var action = this._repository.GetActionById(actionId);
+            var action = await this._repository.GetActionById(actionId);
             action.State = state;
 
             await this._repository.UpdateAsync(action);

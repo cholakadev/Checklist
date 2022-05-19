@@ -1,0 +1,67 @@
+﻿@model Checlist.Domain.DomainModels.Action.Action
+
+@section Styles {
+    <style>
+        .back-arrow {
+            width: 30px;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .return {
+            display: flex;
+            cursor: pointer;
+        }
+
+        .return-label {
+            padding-left: 10px;
+        }
+
+        .header, .return-label {
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+
+        a, a:visited, a:hover, a:active, a:focus {
+            color: black;
+            text-decoration: none;
+            outline: none;
+        }
+    </style>
+}
+
+<div>
+    <div class="header-container">
+        <a asp-action="Index">
+            <div class="return">
+                <img class="back-arrow" src="~/icons/back-arrow.svg" />
+                <p class="return-label">Return</p>
+            </div>
+        </a>
+        <h6 class="header">Action</h6>
+    </div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.State)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.State)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DateString)
+        </dd>
+    </dl>
+</div>
