@@ -27,7 +27,10 @@
                     @Html.DisplayNameFor(model => model.Name)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Date)
+                    <div class="sortable-icon">
+                        @Html.DisplayNameFor(model => model.Date)
+                        <img class="sort-icon" src="~/icons/sort-icon.svg" />
+                    </div>
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.State)
