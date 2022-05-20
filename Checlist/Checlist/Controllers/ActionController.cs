@@ -1,6 +1,7 @@
 ﻿namespace Checlist.Controllers
 {
     using Checlist.Models;
+    using Action = Checlist.Models.Action;
     using Checlist.Business.Contracts;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
@@ -46,6 +47,20 @@
             ViewBag.States = selectListStates;
 
             return View(actions);
+        }
+
+        public async Task<IActionResult> Details(Guid? id)
+        {
+            if (id == null)
+                return NotFound();
+
+            var action = await this._actionService
+                .GetByIdAsync((Guid)id);
+
+            if (action == null)
+                return NotFound();
+
+            return View(action);
         }
 
         [HttpPost]

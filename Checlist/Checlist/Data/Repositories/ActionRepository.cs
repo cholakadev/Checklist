@@ -1,6 +1,7 @@
 ﻿namespace Checlist.Data.Repositories
 {
     using Checlist.Data.Contracts;
+    using Microsoft.EntityFrameworkCore;
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -22,8 +23,8 @@
             return this.DbContext.SaveChangesAsync();
         }
 
-        public Action GetActionById(Guid actionId)
-            => this.Entities.FirstOrDefault(x => x.Id == actionId);
+        public Task<Action> GetActionById(Guid actionId)
+            => this.Entities.FirstOrDefaultAsync(x => x.Id == actionId);
 
         public List<Action> GetAllUserActionsAsync(Guid userId)
         {

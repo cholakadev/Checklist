@@ -1,6 +1,5 @@
-﻿@using Microsoft.AspNetCore.Identity
-@using Checlist.Domain.Enums
-@inject SignInManager<User> SignInManager
+﻿@using Checlist.Domain.Enums
+@using Checlist.Domain.DomainModels.Action;
 @model IEnumerable<Checlist.Domain.DomainModels.Action.Action>
 @{
     ViewBag.Title = "Action data";
@@ -8,99 +7,110 @@
 
 @section Styles
 {
-    <style type="text/css">
-        .table {
-            margin-top: 50px;
-        }
-
-        td {
-            vertical-align: middle !important;
-        }
-
-        .btn-create-open {
-            margin-bottom: 10px;
-        }
-
-        .checkbox, .checkbox-input {
-            width: 20px;
-            height: 20px;
-        }
-
-        .checkbox-label {
-            margin: 0;
-        }
-
-        .delete-item-icon {
-            width: 30px;
-        }
-
-        .deleteItem, .btn {
-            cursor: pointer;
-        }
-    </style>
+    <link rel="stylesheet" href="~/css/actions-index.css" />
 }
+
+<script>
+    $(document).ready(function () {
+        $("body").tooltip({ selector: '[data-toggle=tooltip]' });
+    });
+</script>
 
 @await Html.PartialAsync("_CreatePartial")
 
 <table class="table">
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Name</th>
-            <th scope="col">Date</th>
-            <th scope="col">Done</th>
-            <th scope="col"></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var action in ViewBag.Actions)
-        {
-            var modalId = "DeleteModal" + action.Id;
-            var dataTargetCancel = "#DeleteModal" + action.Id;
-            var index = ViewBag.Actions.IndexOf(action) + 1;
+    @if (((IEnumerable<dynamic>)ViewBag.Actions).Count() > 0)
+    {
+        <thead>
             <tr>
-                <th scope="row">@index</th>
-                <td>@action.Name</td>
-                <td>@action.Date</td>
-                <td>
-                    <form method="post" action="@Url.Action("Update", "Action")">
-                        <input name="actionId" type="hidden" value="@action.Id" />
-                        <select name="state" onchange="this.form.submit()">
-                            <option selected>@action.State</option>
-                            @foreach (var state in Enum.GetValues(typeof(ActionState)))
-                            {
-                                if (state.ToString() != action.State.ToString())
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    <div class="sortable-icon">
+                        @Html.DisplayNameFor(model => model.Date)
+                        <img class="sort-icon" src="~/icons/sort-icon.svg" />
+                    </div>
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.State)
+                </th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+    }
+    <tbody>
+        @{
+            @foreach (var action in ViewBag.Actions)
+            {
+                bool separate = false;
+                int actionIndex = ViewBag.Actions.IndexOf(action);
+                int nextActionIndex = actionIndex + 1;
+                if (nextActionIndex > ((IEnumerable<dynamic>)ViewBag.Actions).Count() - 1)
+                {
+                    nextActionIndex = actionIndex;
+                }
+
+                var nextAction = ViewBag.Actions[nextActionIndex];
+
+                if (action.Date != nextAction.Date)
+                {
+                    separate = true;
+                }
+
+                var modalId = "DeleteModal" + action.Id;
+                var dataTargetCancel = "#DeleteModal" + action.Id;
+
+                <tr class=@(separate == true ? "separated" : "not-separated")>
+                    <td class="action-name"
+                        data-toggle="tooltip"
+                        title="@action.Name">
+                        <a class="details-link" asp-action="Details" asp-route-id="@action.Id">
+                            @(((string)action.Name).Truncate(80))
+                        </a>
+                    </td>
+                    <td>@action.DateString</td>
+                    <td>
+                        @using (Html.BeginForm("Update", "Action", FormMethod.Post))
+                        {
+                            <input name="actionId" type="hidden" value="@action.Id" />
+                            <select name="state" onchange="this.form.submit()">
+                                <option selected>@action.State</option>
+                                @foreach (var state in Enum.GetValues(typeof(ActionState)))
                                 {
-                                    <option>@state</option>
+                                    if (state.ToString() != action.State.ToString())
+                                    {
+                                        <option>@state</option>
+                                    }
                                 }
-                            }
-                        </select>
-                    </form>
-                </td>
-                <td>
-                    <a class="deleteItem" data-toggle="modal" data-target="@dataTargetCancel"><img id="delete" class="delete-item-icon" src="~/icons/delete-item.svg" /></a>
-                    @using (Html.BeginForm("Delete", "Action", FormMethod.Post))
-                    {
-                        <input name="actionId" type="hidden" value="@action.Id" />
-                        <div id="@modalId" class="modal" tabindex="3" role="dialog">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title">Are you sure you want to delete this action?</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button class="btn btn-light btn-md" type="submit">Yes</button>
-                                        <a data-dismiss="modal" class="btn btn-light btn-md">No</a>
+                            </select>
+                        }
+                    </td>
+                    <td>
+                        <a class="deleteItem" data-toggle="modal" data-target="@dataTargetCancel"><img id="delete" class="delete-item-icon" src="~/icons/delete-item.svg" /></a>
+                        @using (Html.BeginForm("Delete", "Action", FormMethod.Post))
+                        {
+                            <input name="actionId" type="hidden" value="@action.Id" />
+                            <div id="@modalId" class="modal" tabindex="3" role="dialog">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Are you sure you want to delete this action?</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-light btn-md" type="submit">Yes</button>
+                                            <a data-dismiss="modal" class="btn btn-light btn-md">No</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    }
-                </td>
-            </tr>
+                        }
+                    </td>
+                </tr>
+            }
         }
     </tbody>
 </table>

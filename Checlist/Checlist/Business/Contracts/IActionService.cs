@@ -9,6 +9,7 @@
 
     public interface IActionService
     {
+        Task<Action> GetByIdAsync(Guid id);
         Task AddAsync(string name, DateTime date, User user);
         Task UpdateAsync(Guid actionId, ActionState state);
         Task DeleteAsync(Guid actionId);
